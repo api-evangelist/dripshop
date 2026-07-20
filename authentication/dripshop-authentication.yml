@@ -1,0 +1,60 @@
+generated: '2026-07-18'
+method: derived
+source: >-
+  graphql/dripshop-schema.graphql + live behavior probe of
+  https://api.dripshop.live/graphql
+notes: >-
+  Derived from the GraphQL schema and observed endpoint behavior; Drip Shop publishes no
+  developer auth documentation. The GraphQL introspection does not declare formal
+  securitySchemes (GraphQL has no equivalent), so the model below is inferred from the
+  operation surface and from probing: an unauthenticated `query { health }` succeeds while
+  `query { me { id } }` returns an errors[] payload, indicating per-operation
+  authentication with a bearer token on the Authorization header.
+summary:
+  types:
+  - http
+  - oauth2
+  http_scheme: bearer
+  bearer_format: JWT
+  transport: Authorization header (Bearer token)
+  public_operations:
+  - health
+schemes:
+- name: bearerAuth
+  type: http
+  scheme: bearer
+  bearer_format: JWT
+  description: >-
+    App-issued bearer token required by nearly all queries and mutations. Presented on the
+    Authorization header. Minted by the login mutations below.
+  sources:
+  - graphql/dripshop-schema.graphql
+login_flows:
+- name: Wallet / crypto sign-in
+  operations:
+  - connectOrLoginWithWallet
+  - requiresUserWalletApproval
+  - getUserWalletDelegatePermission
+  description: Web3 wallet-based authentication (Solana / Base / EVM), the crypto-native path.
+- name: Farcaster
+  operations:
+  - createFarcasterUser
+  - farcasterUser
+  description: Farcaster identity used by the Drip Farcaster mini-app.
+- name: Facebook OAuth
+  operations:
+  - facebookOAuthUrl
+  - facebookOAuthSdkLogin
+  - facebookOAuthDesiredScopes
+  description: Facebook login and Graph API linking for simulcast to Facebook Live / Groups.
+- name: Twitch OAuth
+  operations:
+  - createTwitchUser
+  - twitchUser
+  description: Twitch account linking for simulcasting.
+- name: YouTube OAuth
+  operations:
+  - createYoutubeUser
+  - refreshYoutubeUser
+  - youtubeUser
+  description: YouTube account linking for simulcasting.
