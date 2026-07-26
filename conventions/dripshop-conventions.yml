@@ -1,0 +1,59 @@
+generated: '2026-07-18'
+method: derived
+source: graphql/dripshop-schema.graphql (live introspection)
+notes: >-
+  Cross-cutting request/response semantics derived from the GraphQL schema. Drip Shop does
+  not publish a developer conventions page; these are inferred from the introspected types
+  and observed endpoint behavior.
+protocol: GraphQL
+endpoint: https://api.dripshop.live/graphql
+authentication:
+  style: bearer-token
+  header: Authorization
+  detail: See authentication/dripshop-authentication.yml
+pagination:
+  style: relay-cursor-connections
+  detail: >-
+    List queries return Relay-style `*Connection` objects with `edges { node cursor }` and
+    `pageInfo { hasNextPage hasPreviousPage startCursor endCursor }`.
+  arguments:
+  - first
+  - after
+  - last
+  - before
+  response_fields:
+  - edges
+  - pageInfo
+  - hasNextPage
+  - endCursor
+error_envelope:
+  style: graphql-errors
+  detail: >-
+    Transport is HTTP 200 with a top-level `errors[]` array per the GraphQL spec; each entry
+    carries `message` and `path`. Many mutations additionally model outcomes as tagged union
+    result types (`<Operation>Success` plus typed error members) returned in `data`.
+  union_result_pattern: true
+request_tracing:
+  header: drip-trace-id
+  detail: Responses include a `drip-trace-id` header for correlation.
+versioning:
+  style: field-level-suffix
+  detail: >-
+    No global API version. Newer variants of operations and types are exposed with a `V2`
+    suffix alongside the originals (e.g. `meV2`, `streamV2`, `productBySlugV2`,
+    `cartV2`, `giveawayEnterV3`); clients opt in per field.
+idempotency:
+  supported: false
+  detail: >-
+    No idempotency-key header or parameter is present in the schema. No Idempotency pointer
+    is wired.
+realtime:
+  transport: graphql-subscriptions (WebSocket)
+  detail: 56 subscriptions provide stream/auction/giveaway/chat/user realtime events.
+rate_limiting:
+  documented: false
+  detail: No rate-limit headers or documentation observed.
+cross_links:
+  authentication: authentication/dripshop-authentication.yml
+  data_model: data-model/dripshop-data-model.yml
+  graphql_schema: graphql/dripshop-schema.graphql

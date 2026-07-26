@@ -1,0 +1,129 @@
+generated: '2026-07-18'
+method: derived
+source: graphql/dripshop-schema.graphql (live introspection)
+notes: >-
+  Entity-relationship graph derived from GraphQL object types: object-valued fields and
+  id-reference fields (`*Id`) become relationships. Only first-party core entities are
+  included; connection/edge wrapper types and pure value objects are omitted.
+entities:
+- name: User
+  description: A Drip account — buyer, seller/host, or both; carries seller onboarding and subscriptions.
+  relationships:
+  - {to: Host, kind: has_one, via: host}
+  - {to: BusinessStore, kind: has_one, via: defaultPickupStore}
+  - {to: UserSubscription, kind: has_one, via: mySubscription}
+  - {to: SellerOnboarding, kind: has_one, via: sellerOnboarding}
+- name: Stream
+  description: A live selling broadcast hosted by a user.
+  relationships:
+  - {to: User, kind: belongs_to, via: host}
+  - {to: HashTag, kind: has_one, via: category}
+  - {to: BoxBreak, kind: has_one, via: activeBoxBreakId}
+  - {to: StreamRaid, kind: has_one, via: raidState}
+  - {to: SimpleTag, kind: has_many, via: tags}
+- name: Product
+  description: A catalog item / collectible listing (cards, sports memorabilia, etc.).
+  relationships:
+  - {to: User, kind: belongs_to, via: creator}
+  - {to: HashTag, kind: has_one, via: category}
+  - {to: Auction, kind: has_many, via: auctions}
+  - {to: Giveaway, kind: has_one, via: activeGiveaway}
+  - {to: CardPricing, kind: has_one, via: cardPricing}
+  - {to: Product, kind: has_one, via: masterId, note: parent/master listing}
+- name: Auction
+  description: A realtime bidding session on a product or box-break spot.
+  relationships:
+  - {to: Product, kind: belongs_to, via: product}
+  - {to: Stream, kind: belongs_to, via: stream}
+  - {to: BoxBreak, kind: has_one, via: boxBreak}
+  - {to: AuctionBid, kind: has_one, via: latestBid}
+  - {to: Order, kind: has_one, via: orderId}
+- name: BoxBreak
+  description: A collectibles "break" — a sealed box split into buyable/randomized spots.
+  relationships:
+  - {to: User, kind: belongs_to, via: creator}
+  - {to: User, kind: has_one, via: influencer}
+  - {to: Stream, kind: belongs_to, via: stream}
+  - {to: BoxBreakSpotMapping, kind: has_many, via: spots}
+  - {to: HashTag, kind: has_one, via: tag}
+- name: Giveaway
+  description: A stream giveaway with entries and a winner.
+  relationships:
+  - {to: Product, kind: has_one, via: product}
+  - {to: Stream, kind: belongs_to, via: stream}
+  - {to: BoxBreak, kind: has_one, via: boxBreak}
+  - {to: User, kind: has_one, via: winner}
+- name: Cart
+  description: A buyer's cart of items pending checkout.
+  relationships:
+  - {to: CartItem, kind: has_many, via: items}
+- name: Order
+  description: A completed purchase with payment, fulfilment and buyback detail.
+  relationships:
+  - {to: User, kind: belongs_to, via: buyer}
+  - {to: User, kind: has_one, via: sellerId}
+  - {to: Product, kind: belongs_to, via: product}
+  - {to: BoxBreak, kind: has_one, via: boxBreak}
+  - {to: Invoice, kind: has_many, via: invoices}
+  - {to: SavedAddress, kind: has_one, via: deliveryAddress}
+- name: Transaction
+  description: A payment transaction spanning one or more items.
+  relationships:
+  - {to: User, kind: belongs_to, via: user}
+  - {to: Auction, kind: has_one, via: auction}
+  - {to: BoxBreak, kind: has_one, via: boxBreak}
+  - {to: SavedAddress, kind: has_one, via: shipmentAddress}
+- name: TransactionItem
+  description: A single line item within a transaction.
+  relationships:
+  - {to: Transaction, kind: belongs_to, via: transaction}
+  - {to: Product, kind: belongs_to, via: product}
+  - {to: User, kind: has_one, via: seller}
+  - {to: Shipment, kind: has_one, via: shipment}
+  - {to: Stream, kind: has_one, via: stream}
+- name: Shipment
+  description: A physical shipment of purchased items between seller and buyer.
+  relationships:
+  - {to: User, kind: has_one, via: seller}
+  - {to: User, kind: has_one, via: buyer}
+  - {to: SavedAddress, kind: has_one, via: buyerAddress}
+  - {to: ShipmentParcel, kind: has_one, via: parcel}
+- name: Invoice
+  description: A seller-issued invoice tied to an order.
+  relationships:
+  - {to: User, kind: belongs_to, via: seller}
+  - {to: User, kind: has_one, via: buyer}
+  - {to: Order, kind: has_one, via: order}
+  - {to: InvoiceItem, kind: has_many, via: items}
+- name: PullGamePull
+  description: A provably-fair pull result (instant pack / pull game).
+  relationships:
+  - {to: User, kind: belongs_to, via: user}
+  - {to: BoxBreak, kind: has_one, via: boxBreak}
+  - {to: Product, kind: has_one, via: spot}
+  - {to: Order, kind: has_one, via: productPurchase}
+  - {to: PullGameServerSeed, kind: has_one, via: serverSeed}
+- name: ProductCollection
+  description: A user-curated collection of products.
+  relationships:
+  - {to: User, kind: belongs_to, via: user}
+  - {to: ProductCollectionMappings, kind: has_many, via: products}
+- name: Conversation
+  description: A direct-message thread between users, optionally about an offer.
+  relationships:
+  - {to: Message, kind: has_one, via: latestMessage}
+  - {to: BulkOffer, kind: has_one, via: latestOffer}
+- name: Message
+  description: A direct message, optionally referencing a product/order/offer.
+  relationships:
+  - {to: Conversation, kind: belongs_to, via: conversation}
+  - {to: User, kind: has_one, via: sender}
+  - {to: User, kind: has_one, via: receiver}
+  - {to: Product, kind: has_one, via: product}
+  - {to: Order, kind: has_one, via: purchase}
+- name: BusinessStore
+  description: A seller's physical store (for local pickup).
+  relationships:
+  - {to: BusinessHour, kind: has_many, via: businessHours}
+  - {to: GeoPoint, kind: has_one, via: location}
+render: null

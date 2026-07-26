@@ -1,0 +1,32 @@
+generated: '2026-07-18'
+method: derived
+source: graphql/dripshop-schema.graphql (live introspection)
+notes: >-
+  Cross-cutting standards conformance derived from the GraphQL schema and endpoint behavior.
+  Drip Shop publishes no compliance/certification program, so no Compliance pointer is
+  wired; this file asserts technical-standard conformance only.
+standards:
+- id: graphql
+  conforms: true
+  evidence: Introspectable GraphQL schema served at https://api.dripshop.live/graphql
+- id: graphql-over-http
+  conforms: true
+  evidence: HTTP POST with application/json request/response bodies
+- id: relay-cursor-connections
+  conforms: true
+  evidence: List queries expose Relay `*Connection`/`edges`/`pageInfo` with first/after/last/before
+- id: graphql-subscriptions
+  conforms: true
+  evidence: 56 Subscription fields for realtime stream/auction/giveaway/chat events
+- id: oauth2
+  conforms: false
+  evidence: >-
+    Social login (Facebook/Twitch/YouTube) uses OAuth for account linking, but the API
+    itself is authenticated with an app-issued bearer token, not an OAuth2 authorization
+    server; no oauth2 securityScheme is declared.
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: Errors use the GraphQL `errors[]` envelope, not application/problem+json
+- id: openapi
+  conforms: false
+  evidence: No OpenAPI/Swagger document is published; GraphQL is the only spec surface

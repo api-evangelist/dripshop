@@ -1,0 +1,35 @@
+generated: '2026-07-18'
+method: searched
+source: live probes of /.well-known/* on Drip Shop Live hosts
+notes: >-
+  No .well-known discovery documents are published. The api.dripshop.live host returns 404
+  for every probed path; the www.dripshop.live host is a client-rendered SPA that returns
+  its 200 HTML shell for any path (catch-all), so those are not real documents. Recorded
+  here as honest negative results. No WellKnown/SecurityTxt pointer is wired.
+hosts:
+- host: https://api.dripshop.live
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /llms.txt
+    status: 404
+- host: https://www.dripshop.live
+  spa_catch_all: true
+  documents:
+  - path: /.well-known/security.txt
+    status: 200
+    note: SPA HTML shell (text/html), not a real security.txt
+  - path: /.well-known/openid-configuration
+    status: 200
+    note: SPA HTML shell, not real OIDC metadata
+  - path: /llms.txt
+    status: 200
+    note: SPA HTML shell, not a real llms.txt

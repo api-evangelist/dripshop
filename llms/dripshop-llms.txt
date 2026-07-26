@@ -1,0 +1,37 @@
+# Drip Shop Live
+
+> Drip Shop Live (Flourish Cares, Inc. DBA Drip Shop Live) is a livestream shopping
+> marketplace and community for collectors — trading cards (Pokémon, Magic, Yu-Gi-Oh!,
+> Digimon, sports cards), memorabilia and other collectibles. Sellers host live streams to
+> run realtime auctions, box breaks, pull games and giveaways; buyers watch, bid, chat and
+> check out in-stream, and earn Drip Coin rewards. The platform is crypto-native (wallet,
+> Solana, Base, and a Farcaster mini-app) alongside Stripe and PayPal payments. It runs on
+> a single first-party GraphQL API (introspection enabled) that powers the iOS, Android and
+> web clients; there is no separate public developer program.
+
+## API
+
+- [Drip Shop Live GraphQL endpoint](https://api.dripshop.live/graphql): Single GraphQL API (268 queries, 283 mutations, 56 subscriptions). Bearer-token auth; `query { health }` is public.
+
+## Specs
+
+- [GraphQL schema (SDL)](graphql/dripshop-schema.graphql): Full schema harvested via live introspection.
+- [GraphQL introspection (JSON)](graphql/dripshop-introspection.json): Raw introspection result.
+- [GraphQL overview](graphql/dripshop-graphql.md): Endpoint, auth, and domain coverage summary.
+
+## Artifacts
+
+- [Authentication](authentication/dripshop-authentication.yml): Bearer/JWT + wallet/Farcaster/social OAuth login flows.
+- [Conventions](conventions/dripshop-conventions.yml): Relay cursor pagination, GraphQL error envelope, V2 field versioning, trace header.
+- [Data model](data-model/dripshop-data-model.yml): Entity-relationship graph (User, Stream, Product, Auction, BoxBreak, Order, ...).
+- [Conformance](conformance/dripshop-conformance.yml): GraphQL / Relay Connections / GraphQL-over-HTTP standards.
+- [Domain security](security/dripshop-domain-security.yml): TLS/HSTS/SPF/DMARC probe results.
+- [MCP (candidate)](mcp/dripshop-mcp.yml): Derived candidate MCP tool mapping over the GraphQL surface.
+- [Well-known probe](well-known/dripshop-well-known.yml): /.well-known discovery probe (none published).
+
+## Docs
+
+- [Website](https://dripshop.live/)
+- [Help Center](https://help.dripshop.live/en/)
+- [Creator / Seller Program](https://host.dripshop.live/creator-program/)
+- [Terms of Service](https://www.dripshop.live/tos)

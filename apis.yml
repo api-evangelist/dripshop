@@ -1,8 +1,28 @@
 aid: dripshop
 name: Dripshop
-description: Dripshop is a company surfaced as a portfolio company of kindred-ventures and added to the
-  API Evangelist network as a stub for enrichment. This profile is a lead awaiting the enrichment pipeline.
+description: >-
+  Drip Shop Live (legal entity Flourish Cares, Inc. DBA Drip Shop Live) is a livestream
+  shopping marketplace and community built for collectors. Sellers host live streams to run
+  realtime auctions, box breaks, provably-fair pull games and giveaways across trading cards
+  (Pokémon, Magic, Yu-Gi-Oh!, Digimon), sports cards and other collectibles, while buyers
+  watch, bid, chat and check out in-stream and earn Drip Coin rewards. The platform is
+  crypto-native — wallet sign-in, Solana, Base and a Farcaster mini-app — alongside Stripe
+  and PayPal payments, and is backed by Kindred Ventures. It runs on a single first-party
+  GraphQL API (introspection enabled) powering its iOS, Android and web clients.
 url: https://raw.githubusercontent.com/api-evangelist/dripshop/refs/heads/main/apis.yml
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://cdn.dripshop.live/images/mini_app_hero.jpg
 x-type: company
 x-source: vc-portfolio
 x-backed-by:
@@ -11,15 +31,64 @@ x-tier: stub
 x-tier-reason: portfolio-lead
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-18'
 tags:
 - Company
-apis: []
+- Live Shopping
+- Collectibles
+- Trading Cards
+- Marketplace
+- Ecommerce
+- Auctions
+- Live Streaming
+- Payments
+- GraphQL
+apis:
+- name: Drip Shop Live GraphQL API
+  description: >-
+    First-party GraphQL API powering Drip Shop Live's livestream shopping clients — streams,
+    auctions, box breaks, giveaways, catalog, carts, orders, payments and messaging. 268
+    queries, 283 mutations, 56 subscriptions. Bearer-token authenticated; introspection was
+    enabled at capture.
+  humanURL: https://help.dripshop.live/en/
+  baseURL: https://api.dripshop.live/graphql
+  properties:
+  - type: GraphQL
+    url: graphql/dripshop-schema.graphql
+  - type: Documentation
+    url: graphql/dripshop-graphql.md
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: GraphQL
+  url: graphql/dripshop-schema.graphql
+- type: Authentication
+  url: authentication/dripshop-authentication.yml
+- type: Conventions
+  url: conventions/dripshop-conventions.yml
+- type: DataModel
+  url: data-model/dripshop-data-model.yml
+- type: Conformance
+  url: conformance/dripshop-conformance.yml
+- type: MCPServer
+  url: mcp/dripshop-mcp.yml
+- type: LLMsTxt
+  url: llms/dripshop-llms.txt
+- type: DomainSecurity
+  url: security/dripshop-domain-security.yml
 - type: Website
   url: https://dripshop.live/
+- type: Support
+  url: https://help.dripshop.live/en/
+- type: GettingStarted
+  url: https://host.dripshop.live/creator-program/
+- type: TermsOfService
+  url: https://www.dripshop.live/tos
+x-enrichment:
+  date: '2026-07-19'
+  status: backfilled
+  pass: local-v1
+  note: backfilled from .gitignore signal + verified work evidence
