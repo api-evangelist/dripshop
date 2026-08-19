@@ -2,123 +2,128 @@ generated: '2026-07-18'
 method: derived
 status: candidate
 source: graphql/dripshop-schema.graphql (live introspection)
-notes: >-
-  No official Drip Shop MCP server exists. This is a DERIVED candidate: a representative,
-  agent-safe subset of the 268 GraphQL queries and 283 mutations mapped one-to-one to MCP
-  tools. Not a hosted server; it documents how the GraphQL surface could be exposed to
-  agents. This is a curated representative subset (36 tools) of the ~551 total operations —
-  the full schema at graphql/dripshop-schema.graphql is the source of truth.
+notes: 'No official Drip Shop MCP server exists. This is a DERIVED candidate: a representative, agent-safe
+  subset of the 268 GraphQL queries and 283 mutations mapped one-to-one to MCP tools. Not a hosted server;
+  it documents how the GraphQL surface could be exposed to agents. This is a curated representative subset
+  (36 tools) of the ~551 total operations — the full schema at graphql/dripshop-schema.graphql is the
+  source of truth.'
 server:
   name: dripshop
   transport: http
   graphql_endpoint: https://api.dripshop.live/graphql
   url: null
 tools:
-  - name: health
-    kind: query
-    source_operation: graphql/dripshop-schema.graphql#Query.health
-  - name: stream
-    kind: query
-    source_operation: graphql/dripshop-schema.graphql#Query.stream
-  - name: streamsLiveNow
-    kind: query
-    source_operation: graphql/dripshop-schema.graphql#Query.streamsLiveNow
-  - name: streamProducts
-    kind: query
-    source_operation: graphql/dripshop-schema.graphql#Query.streamProducts
-  - name: auction
-    kind: query
-    source_operation: graphql/dripshop-schema.graphql#Query.auction
-  - name: auctionLatestBid
-    kind: query
-    source_operation: graphql/dripshop-schema.graphql#Query.auctionLatestBid
-  - name: boxBreakDetails
-    kind: query
-    source_operation: graphql/dripshop-schema.graphql#Query.boxBreakDetails
-  - name: boxBreaksActiveList
-    kind: query
-    source_operation: graphql/dripshop-schema.graphql#Query.boxBreaksActiveList
-  - name: giveaway
-    kind: query
-    source_operation: graphql/dripshop-schema.graphql#Query.giveaway
-  - name: productById
-    kind: query
-    source_operation: graphql/dripshop-schema.graphql#Query.productById
-  - name: productBySlug
-    kind: query
-    source_operation: graphql/dripshop-schema.graphql#Query.productBySlug
-  - name: productsByCategory
-    kind: query
-    source_operation: graphql/dripshop-schema.graphql#Query.productsByCategory
-  - name: productCategories
-    kind: query
-    source_operation: graphql/dripshop-schema.graphql#Query.productCategories
-  - name: tags
-    kind: query
-    source_operation: graphql/dripshop-schema.graphql#Query.tags
-  - name: user
-    kind: query
-    source_operation: graphql/dripshop-schema.graphql#Query.user
-  - name: userBySlug
-    kind: query
-    source_operation: graphql/dripshop-schema.graphql#Query.userBySlug
-  - name: me
-    kind: query
-    source_operation: graphql/dripshop-schema.graphql#Query.me
-  - name: cart
-    kind: query
-    source_operation: graphql/dripshop-schema.graphql#Query.cart
-  - name: myPurchases
-    kind: query
-    source_operation: graphql/dripshop-schema.graphql#Query.myPurchases
-  - name: hostUpcomingStreams
-    kind: query
-    source_operation: graphql/dripshop-schema.graphql#Query.hostUpcomingStreams
-  - name: hostReviews
-    kind: query
-    source_operation: graphql/dripshop-schema.graphql#Query.hostReviews
-  - name: similarProducts
-    kind: query
-    source_operation: graphql/dripshop-schema.graphql#Query.similarProducts
-  - name: posts
-    kind: query
-    source_operation: graphql/dripshop-schema.graphql#Query.posts
-  - name: postById
-    kind: query
-    source_operation: graphql/dripshop-schema.graphql#Query.postById
-  - name: cartItemAdd
-    kind: mutation
-    source_operation: graphql/dripshop-schema.graphql#Mutation.cartItemAdd
-  - name: cartItemRemove
-    kind: mutation
-    source_operation: graphql/dripshop-schema.graphql#Mutation.cartItemRemove
-  - name: cartCreateAnonymous
-    kind: mutation
-    source_operation: graphql/dripshop-schema.graphql#Mutation.cartCreateAnonymous
-  - name: checkoutCartAddItem
-    kind: mutation
-    source_operation: graphql/dripshop-schema.graphql#Mutation.checkoutCartAddItem
-  - name: auctionPlaceBid
-    kind: mutation
-    source_operation: graphql/dripshop-schema.graphql#Mutation.auctionPlaceBid
-  - name: auctionMaxBid
-    kind: mutation
-    source_operation: graphql/dripshop-schema.graphql#Mutation.auctionMaxBid
-  - name: giveawayEnter
-    kind: mutation
-    source_operation: graphql/dripshop-schema.graphql#Mutation.giveawayEnter
-  - name: enterDrop
-    kind: mutation
-    source_operation: graphql/dripshop-schema.graphql#Mutation.enterDrop
-  - name: setFollowingUser
-    kind: mutation
-    source_operation: graphql/dripshop-schema.graphql#Mutation.setFollowingUser
-  - name: addBookmark
-    kind: mutation
-    source_operation: graphql/dripshop-schema.graphql#Mutation.addBookmark
-  - name: createMessage
-    kind: mutation
-    source_operation: graphql/dripshop-schema.graphql#Mutation.createMessage
-  - name: productCommentCreate
-    kind: mutation
-    source_operation: graphql/dripshop-schema.graphql#Mutation.productCommentCreate
+- name: health
+  kind: query
+  source_operation: graphql/dripshop-schema.graphql#Query.health
+- name: stream
+  kind: query
+  source_operation: graphql/dripshop-schema.graphql#Query.stream
+- name: streamsLiveNow
+  kind: query
+  source_operation: graphql/dripshop-schema.graphql#Query.streamsLiveNow
+- name: streamProducts
+  kind: query
+  source_operation: graphql/dripshop-schema.graphql#Query.streamProducts
+- name: auction
+  kind: query
+  source_operation: graphql/dripshop-schema.graphql#Query.auction
+- name: auctionLatestBid
+  kind: query
+  source_operation: graphql/dripshop-schema.graphql#Query.auctionLatestBid
+- name: boxBreakDetails
+  kind: query
+  source_operation: graphql/dripshop-schema.graphql#Query.boxBreakDetails
+- name: boxBreaksActiveList
+  kind: query
+  source_operation: graphql/dripshop-schema.graphql#Query.boxBreaksActiveList
+- name: giveaway
+  kind: query
+  source_operation: graphql/dripshop-schema.graphql#Query.giveaway
+- name: productById
+  kind: query
+  source_operation: graphql/dripshop-schema.graphql#Query.productById
+- name: productBySlug
+  kind: query
+  source_operation: graphql/dripshop-schema.graphql#Query.productBySlug
+- name: productsByCategory
+  kind: query
+  source_operation: graphql/dripshop-schema.graphql#Query.productsByCategory
+- name: productCategories
+  kind: query
+  source_operation: graphql/dripshop-schema.graphql#Query.productCategories
+- name: tags
+  kind: query
+  source_operation: graphql/dripshop-schema.graphql#Query.tags
+- name: user
+  kind: query
+  source_operation: graphql/dripshop-schema.graphql#Query.user
+- name: userBySlug
+  kind: query
+  source_operation: graphql/dripshop-schema.graphql#Query.userBySlug
+- name: me
+  kind: query
+  source_operation: graphql/dripshop-schema.graphql#Query.me
+- name: cart
+  kind: query
+  source_operation: graphql/dripshop-schema.graphql#Query.cart
+- name: myPurchases
+  kind: query
+  source_operation: graphql/dripshop-schema.graphql#Query.myPurchases
+- name: hostUpcomingStreams
+  kind: query
+  source_operation: graphql/dripshop-schema.graphql#Query.hostUpcomingStreams
+- name: hostReviews
+  kind: query
+  source_operation: graphql/dripshop-schema.graphql#Query.hostReviews
+- name: similarProducts
+  kind: query
+  source_operation: graphql/dripshop-schema.graphql#Query.similarProducts
+- name: posts
+  kind: query
+  source_operation: graphql/dripshop-schema.graphql#Query.posts
+- name: postById
+  kind: query
+  source_operation: graphql/dripshop-schema.graphql#Query.postById
+- name: cartItemAdd
+  kind: mutation
+  source_operation: graphql/dripshop-schema.graphql#Mutation.cartItemAdd
+- name: cartItemRemove
+  kind: mutation
+  source_operation: graphql/dripshop-schema.graphql#Mutation.cartItemRemove
+- name: cartCreateAnonymous
+  kind: mutation
+  source_operation: graphql/dripshop-schema.graphql#Mutation.cartCreateAnonymous
+- name: checkoutCartAddItem
+  kind: mutation
+  source_operation: graphql/dripshop-schema.graphql#Mutation.checkoutCartAddItem
+- name: auctionPlaceBid
+  kind: mutation
+  source_operation: graphql/dripshop-schema.graphql#Mutation.auctionPlaceBid
+- name: auctionMaxBid
+  kind: mutation
+  source_operation: graphql/dripshop-schema.graphql#Mutation.auctionMaxBid
+- name: giveawayEnter
+  kind: mutation
+  source_operation: graphql/dripshop-schema.graphql#Mutation.giveawayEnter
+- name: enterDrop
+  kind: mutation
+  source_operation: graphql/dripshop-schema.graphql#Mutation.enterDrop
+- name: setFollowingUser
+  kind: mutation
+  source_operation: graphql/dripshop-schema.graphql#Mutation.setFollowingUser
+- name: addBookmark
+  kind: mutation
+  source_operation: graphql/dripshop-schema.graphql#Mutation.addBookmark
+- name: createMessage
+  kind: mutation
+  source_operation: graphql/dripshop-schema.graphql#Mutation.createMessage
+- name: productCommentCreate
+  kind: mutation
+  source_operation: graphql/dripshop-schema.graphql#Mutation.productCommentCreate
+deployment:
+  mode: none
+  verified: derived
+  tools: 36
+  checked: '2026-08-12'
+  source: catalog MCP census
